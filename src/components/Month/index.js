@@ -4,11 +4,10 @@ import {
   endOfMonth,
   startOfWeek,
   endOfWeek,
-  eachDayOfInterval,
-  format,
-  isSameMonth
+  eachDayOfInterval
 } from "date-fns";
 import DayName from "./DayName";
+import Day from "./Day";
 
 const Month = ({ date }) => {
   const daysOfMonth = eachDayOfInterval({
@@ -19,18 +18,9 @@ const Month = ({ date }) => {
   return (
     <div className="month">
       <DayName date={date} />
-      {daysOfMonth.map(
-        day =>
-          isSameMonth(date, new Date(day)) ? (
-            <strong key={day} className="day">
-              {format(day, "d")}
-            </strong>
-          ) : (
-            <span key={day} className="day">
-              {format(day, "d")}
-            </span>
-          )
-      )}
+      {daysOfMonth.map(day => (
+        <Day key={day} date={date} day={day} />
+      ))}
     </div>
   );
 };

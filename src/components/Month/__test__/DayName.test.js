@@ -6,6 +6,5 @@ afterEach(cleanup);
 
 it("Renders day labels properly", () => {
   const { getByText } = render(<DayName date={new Date()} />);
-  const element = getByText("Mon");
-  expect(element.innerHTML).toBe("Mon");
+  expect(getByText("Mon").innerHTML).toContain("Mon");
 });
