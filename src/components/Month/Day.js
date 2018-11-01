@@ -1,6 +1,7 @@
 import React from "react";
 import { format, isSameMonth, isSameDay, isWithinInterval } from "date-fns";
 import styled from "styled-components";
+import { isInInterval } from "../../utils";
 
 const StyledDay = styled.div`
   flex-basis: 13%;
@@ -9,13 +10,14 @@ const StyledDay = styled.div`
   background-color: ${props =>
     props.isSelectedStartDay ||
     props.isSelectedEndDay ||
-    props.isBetweenSelectedDates
+    props.isBetweenSelectedDates ||
+    props.isBetweenHoverAndSelectedDate
       ? "red"
       : "white"};
 `;
 
-const Day = ({ date, day, selectedDates, onDayClick }) => {
-  const { start, end } = selectedDates;
+const Day = ({ date, day, selectedDates, onDayClick, onDayHover }) => {
+  const { start, end, hoverDate, selectionInProcess } = selectedDates;
 
   return (
     <StyledDay
@@ -26,8 +28,18 @@ const Day = ({ date, day, selectedDates, onDayClick }) => {
         start,
         end
       })}
+      isBetweenHoverAndSelectedDate={
+        isInInterval(new Date(day), {
+          start,
+          end: hoverDate
+        }) && selectionInProcess
+      }
     >
-      <div onClick={() => onDayClick(day)} value={day}>
+      <div
+        onMouseOver={() => onDayHover(day)}
+        onClick={() => onDayClick(day)}
+        value={day}
+      >
         {format(day, "d")}
       </div>
     </StyledDay>

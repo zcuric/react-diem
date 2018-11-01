@@ -15,6 +15,7 @@ const Month = ({ date }) => {
   const [selectedDates, setSelectedDates] = useState({
     start: new Date(),
     end: new Date(),
+    hoverDate: new Date(),
     selectionInProcess: false
   });
 
@@ -22,6 +23,15 @@ const Month = ({ date }) => {
     start: startOfWeek(startOfMonth(date), { weekStartsOn: 1 }),
     end: endOfWeek(endOfMonth(date), { weekStartsOn: 1 })
   });
+
+  const onDayHover = date => {
+    if (selectedDates.selectionInProcess) {
+      setSelectedDates({
+        ...selectedDates,
+        hoverDate: date
+      });
+    }
+  };
 
   const onDayClick = date => {
     const { start, end, selectionInProcess } = selectedDates;
@@ -31,6 +41,7 @@ const Month = ({ date }) => {
       !selectionInProcess
     ) {
       return setSelectedDates({
+        ...selectedDates,
         start: new Date(date),
         end: new Date(date),
         selectionInProcess: true
@@ -45,6 +56,7 @@ const Month = ({ date }) => {
     }
     if (compareAsc(date, start) === -1) {
       return setSelectedDates({
+        ...selectedDates,
         start: new Date(date),
         end: start,
         selectionInProcess: false
@@ -63,6 +75,7 @@ const Month = ({ date }) => {
         {daysOfMonth.map(day => (
           <Day
             onDayClick={onDayClick}
+            onDayHover={onDayHover}
             selectedDates={selectedDates}
             key={day}
             date={date}
