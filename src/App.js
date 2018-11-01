@@ -12,22 +12,30 @@ class App extends Component {
     const { date } = this.state;
     return (
       <div className="App">
-        <h1>{format(date, "MM/dd/yyyy")}</h1>
-        <button
-          onClick={() =>
-            this.setState(prevstate => ({ date: subMonths(prevstate.date, 1) }))
-          }
-        >
-          -
-        </button>
-        <Month date={date} />
-        <button
-          onClick={() =>
-            this.setState(prevstate => ({ date: addMonths(prevstate.date, 1) }))
-          }
-        >
-          +
-        </button>
+        <div className="container">
+          <h1>{format(date, "MM/dd/yyyy")}</h1>
+          <div className="buttons">
+            <button
+              onClick={() =>
+                this.setState(prevstate => ({
+                  date: subMonths(prevstate.date, 1)
+                }))
+              }
+            >
+              {`<`}
+            </button>
+            <button
+              onClick={() =>
+                this.setState(prevstate => ({
+                  date: addMonths(prevstate.date, 1)
+                }))
+              }
+            >
+              {`>`}
+            </button>
+          </div>
+          <Month date={date} />
+        </div>
       </div>
     );
   }

@@ -41,23 +41,23 @@ const Month = ({ date }) => {
       !selectionInProcess
     ) {
       return setSelectedDates({
-        ...selectedDates,
-        start: new Date(date),
-        end: new Date(date),
+        start: date,
+        end: date,
+        hoverDate: date,
         selectionInProcess: true
       });
     }
     if (compareAsc(date, start) === 1) {
       return setSelectedDates({
         ...selectedDates,
-        end: new Date(date),
+        end: date,
         selectionInProcess: false
       });
     }
     if (compareAsc(date, start) === -1) {
       return setSelectedDates({
         ...selectedDates,
-        start: new Date(date),
+        start: date,
         end: start,
         selectionInProcess: false
       });

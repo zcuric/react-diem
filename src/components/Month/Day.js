@@ -1,47 +1,61 @@
-import React from "react";
-import { format, isSameMonth, isSameDay, isWithinInterval } from "date-fns";
+import React, { useState } from "react";
+import { format, isSameMonth, isSameDay } from "date-fns";
 import styled from "styled-components";
 import { isInInterval } from "../../utils";
 
 const StyledDay = styled.div`
+  box-sizing: border-box;
+  cursor: pointer;
+  height: 35px;
+  display: flex;
   flex-basis: 13%;
+  justify-content: center;
+  align-items: center;
   font-weight: bold;
-  color: ${props => (props.isSameMonth ? "blue" : "gray")};
-  background-color: ${props =>
+  color: ${props => (props.isSameMonth ? "#424874" : "#D5D7E5")};
+  ${props =>
     props.isSelectedStartDay ||
     props.isSelectedEndDay ||
     props.isBetweenSelectedDates ||
     props.isBetweenHoverAndSelectedDate
-      ? "red"
-      : "white"};
+      ? "background-color: #D5D7E5; color: #424874 "
+      : "background-color: white;"};
+
+  ${props => (props.isSameMonth ? "#424874" : "#D5D7E5")};
+  ${props => (props.hover ? "border: 1px solid #D5D7E5" : "")};
 `;
 
 const Day = ({ date, day, selectedDates, onDayClick, onDayHover }) => {
+  const [state, setState] = useState({ hover: false });
   const { start, end, hoverDate, selectionInProcess } = selectedDates;
 
   return (
     <StyledDay
-      isSameMonth={isSameMonth(date, new Date(day))}
-      isSelectedStartDay={isSameDay(start, new Date(day))}
-      isSelectedEndDay={isSameDay(end, new Date(day))}
-      isBetweenSelectedDates={isWithinInterval(new Date(day), {
-        start,
-        end
-      })}
+      isSameMonth={isSameMonth(date, day)}
+      isSelectedStartDay={isSameDay(start, day)}
+      isSelectedEndDay={isSameDay(end, day)}
+      isBetweenSelectedDates={
+        isInInterval(day, {
+          start,
+          end
+        }) && !selectionInProcess
+      }
       isBetweenHoverAndSelectedDate={
-        isInInterval(new Date(day), {
+        isInInterval(day, {
           start,
           end: hoverDate
         }) && selectionInProcess
       }
+      onMouseOver={() => (selectionInProcess ? onDayHover(day) : false)}
+      onMouseEnter={() =>
+        !selectionInProcess ? setState({ hover: true }) : false
+      }
+      onMouseLeave={() => setState({ hover: false })}
+      onClick={() => onDayClick(day)}
+      value={day}
+      hover={state.hover}
     >
-      <div
-        onMouseOver={() => onDayHover(day)}
-        onClick={() => onDayClick(day)}
-        value={day}
-      >
-        {format(day, "d")}
-      </div>
+      {format(day, "d")}
     </StyledDay>
   );
 };

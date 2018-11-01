@@ -1,3 +1,30 @@
+.App,
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.buttons button {
+  width: 50px;
+  height: 30px;
+  border: 1px solid #d5d7e5;
+  border-radius: 5px;
+  color: #424874;
+  background-color: #c9cad6;
+  background-color: #c9cad6;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
 .month {
   display: flex;
   flex-wrap: wrap;
