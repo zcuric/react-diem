@@ -21,7 +21,6 @@ const StyledDay = styled.div`
       ? "background-color: #D5D7E5; color: #424874 "
       : "background-color: white;"};
 
-  ${props => (props.isSameMonth ? "#424874" : "#D5D7E5")};
   ${props => (props.hover ? "border: 1px solid #D5D7E5" : "")};
 `;
 

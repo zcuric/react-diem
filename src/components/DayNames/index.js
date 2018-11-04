@@ -1,6 +1,7 @@
 import React from "react";
 import { startOfWeek, endOfWeek, eachDayOfInterval, format } from "date-fns";
 import styled from "styled-components";
+import { CalendarContext } from "../Calendar";
 
 const StyledDayLabel = styled.div`
   height: 35px;
@@ -14,16 +15,26 @@ const StyledDayLabel = styled.div`
   font-weight: 500;
 `;
 
-const DaysLabel = ({ date }) => {
-  const daysOfWeek = eachDayOfInterval({
+const daysOfWeek = date =>
+  eachDayOfInterval({
     start: startOfWeek(date, { weekStartsOn: 1 }),
     end: endOfWeek(date, { weekStartsOn: 1 })
   });
-  return daysOfWeek.map(day => (
-    <StyledDayLabel key={format(day, "E")} className="day">
-      {format(day, "E")}
-    </StyledDayLabel>
-  ));
+
+const DaysLabel = () => {
+  return (
+    <div className="month">
+      <CalendarContext.Consumer>
+        {({ date }) =>
+          daysOfWeek(date).map(day => (
+            <StyledDayLabel key={format(day, "E")} className="day">
+              {format(day, "E")}
+            </StyledDayLabel>
+          ))
+        }
+      </CalendarContext.Consumer>
+    </div>
+  );
 };
 
 export default DaysLabel;

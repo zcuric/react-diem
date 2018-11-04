@@ -1,89 +1,38 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   startOfMonth,
   endOfMonth,
   startOfWeek,
   endOfWeek,
-  eachDayOfInterval,
-  compareAsc,
-  format
+  eachDayOfInterval
 } from "date-fns";
-import DayName from "./DayName";
-import Day from "./Day";
+import Day from "../Day";
+import { CalendarContext } from "../Calendar";
 
-const Month = ({ date }) => {
-  const [selectedDates, setSelectedDates] = useState({
-    start: new Date(),
-    end: new Date(),
-    hoverDate: new Date(),
-    selectionInProcess: false
-  });
-
-  const daysOfMonth = eachDayOfInterval({
+const daysOfMonth = date =>
+  eachDayOfInterval({
     start: startOfWeek(startOfMonth(date), { weekStartsOn: 1 }),
     end: endOfWeek(endOfMonth(date), { weekStartsOn: 1 })
   });
 
-  const onDayHover = date => {
-    if (selectedDates.selectionInProcess) {
-      setSelectedDates({
-        ...selectedDates,
-        hoverDate: date
-      });
-    }
-  };
-
-  const onDayClick = date => {
-    const { start, end, selectionInProcess } = selectedDates;
-    if (
-      compareAsc(date, start) === 0 ||
-      compareAsc(date, end) === 0 ||
-      !selectionInProcess
-    ) {
-      return setSelectedDates({
-        start: date,
-        end: date,
-        hoverDate: date,
-        selectionInProcess: true
-      });
-    }
-    if (compareAsc(date, start) === 1) {
-      return setSelectedDates({
-        ...selectedDates,
-        end: date,
-        selectionInProcess: false
-      });
-    }
-    if (compareAsc(date, start) === -1) {
-      return setSelectedDates({
-        ...selectedDates,
-        start: date,
-        end: start,
-        selectionInProcess: false
-      });
-    }
-  };
-
+const Month = () => {
   return (
-    <>
-      <h4>
-        {format(selectedDates.start, "dd.MM.y")} -{" "}
-        {format(selectedDates.end, "dd.MM.y")}
-      </h4>
-      <div className="month">
-        <DayName date={date} />
-        {daysOfMonth.map(day => (
-          <Day
-            onDayClick={onDayClick}
-            onDayHover={onDayHover}
-            selectedDates={selectedDates}
-            key={day}
-            date={date}
-            day={day}
-          />
-        ))}
-      </div>
-    </>
+    <div className="month">
+      <CalendarContext.Consumer>
+        {context =>
+          daysOfMonth(context.date).map(day => (
+            <Day
+              onDayClick={context.onDayClick}
+              onDayHover={context.onDayHover}
+              selectedDates={context.selectedDates}
+              key={day}
+              date={context.date}
+              day={day}
+            />
+          ))
+        }
+      </CalendarContext.Consumer>
+    </div>
   );
 };
 

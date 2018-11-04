@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import "./App.css";
 import { addMonths, subMonths, format } from "date-fns";
+import Calendar from "./components/Calendar";
 import Month from "./components/Month";
+import DayNames from "./components/DayNames";
 
 class App extends Component {
   state = {
@@ -34,7 +36,10 @@ class App extends Component {
               {`>`}
             </button>
           </div>
-          <Month date={date} />
+          <Calendar date={date}>
+            <DayNames />
+            <Month />
+          </Calendar>
         </div>
       </div>
     );
