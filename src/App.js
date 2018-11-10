@@ -1,5 +1,5 @@
 import React from "react";
-import { hr as locale } from "date-fns/locale";
+import { enUS as locale } from "date-fns/locale";
 import "./App.css";
 import Calendar from "./components/Calendar";
 import Month from "./components/Month";
@@ -12,7 +12,7 @@ import DateSelect from "./components/DateSelect";
 const App = () => (
   <div className="App">
     <div className="container">
-      <Calendar date={new Date()} locale={locale} weekStartsOn={0}>
+      <Calendar date={new Date()} locale={locale}>
         <DateSelect />
         <DisplayMonth />
         <DisplayRange />

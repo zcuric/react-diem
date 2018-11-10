@@ -10,7 +10,6 @@ export const CalendarContext = React.createContext({
   },
   dateFormat: "dd.MM.yyyy",
   locale: enUS,
-  weekStartsOn: 0,
   updateDate: () => {},
   onDayHover: () => {},
   onDayClick: () => {}
@@ -76,7 +75,6 @@ const Calendar = props => {
         selectedDates,
         dateFormat: props.dateFormat || "dd.MM.yyyy",
         locale: props.locale || enUS,
-        weekStartsOn: props.weekStartsOn || 0,
         onDayClick,
         onDayHover,
         updateDate
