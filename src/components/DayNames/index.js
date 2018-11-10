@@ -15,20 +15,20 @@ const StyledDayLabel = styled.div`
   font-weight: 500;
 `;
 
-const daysOfWeek = date =>
+const daysOfWeek = (date, weekStartsOn, locale) =>
   eachDayOfInterval({
-    start: startOfWeek(date, { weekStartsOn: 1 }),
-    end: endOfWeek(date, { weekStartsOn: 1 })
+    start: startOfWeek(date, { weekStartsOn }, { locale }),
+    end: endOfWeek(date, { weekStartsOn }, { locale })
   });
 
 const DaysLabel = () => {
   return (
     <div className="month">
       <CalendarContext.Consumer>
-        {({ date }) =>
-          daysOfWeek(date).map(day => (
-            <StyledDayLabel key={format(day, "E")} className="day">
-              {format(day, "E")}
+        {({ date, weekStartsOn, locale }) =>
+          daysOfWeek(date, weekStartsOn, locale).map(day => (
+            <StyledDayLabel key={format(day, "E", { locale })} className="day">
+              {format(day, "E", { locale })}
             </StyledDayLabel>
           ))
         }

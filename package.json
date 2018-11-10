@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "date-fns": "^2.0.0-alpha.24",
+    "date-fns": "^2.0.0-alpha.25",
     "react": "^16.7.0-alpha.0",
     "react-dom": "^16.7.0-alpha.0",
-    "react-scripts": "2.0.5",
+    "react-scripts": "^2.1.1",
     "react-testing-library": "^5.2.3",
-    "styled-components": "^4.0.2"
+    "styled-components": "^4.0.3"
   },
   "scripts": {
     "start": "react-scripts start",

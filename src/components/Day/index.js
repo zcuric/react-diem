@@ -21,10 +21,10 @@ const StyledDay = styled.div`
       ? "background-color: #D5D7E5; color: #424874 "
       : "background-color: white;"};
 
-  ${props => (props.hover ? "border: 1px solid #D5D7E5" : "")};
+  ${props => (props.hover ? "border: 1px solid #424874" : "")};
 `;
 
-const Day = ({ date, day, selectedDates, onDayClick, onDayHover }) => {
+const Day = ({ date, day, selectedDates, onDayClick, onDayHover, locale }) => {
   const [state, setState] = useState({ hover: false });
   const { start, end, hoverDate, selectionInProcess } = selectedDates;
 
@@ -54,7 +54,7 @@ const Day = ({ date, day, selectedDates, onDayClick, onDayHover }) => {
       value={day}
       hover={state.hover}
     >
-      {format(day, "d")}
+      {format(day, "d", { locale })}
     </StyledDay>
   );
 };

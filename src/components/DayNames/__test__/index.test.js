@@ -5,7 +5,7 @@ import DayName from "..";
 afterEach(cleanup);
 
 it("Renders day labels properly", () => {
-  const { getByText } = render(<DayName date={new Date()} />);
+  const { getByText } = render(<DayName />);
   expect(getByText("Mon").innerHTML).toContain("Mon");
   expect(getByText("Sun").innerHTML).toContain("Sun");
 });

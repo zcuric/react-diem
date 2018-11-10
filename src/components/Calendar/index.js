@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { compareAsc } from "date-fns";
+import { enUS } from "date-fns/locale";
 
 export const CalendarContext = React.createContext({
   date: new Date(),
@@ -7,17 +8,24 @@ export const CalendarContext = React.createContext({
     start: new Date(),
     end: new Date()
   },
+  dateFormat: "dd.MM.yyyy",
+  locale: enUS,
+  weekStartsOn: 0,
+  updateDate: () => {},
   onDayHover: () => {},
   onDayClick: () => {}
 });
 
 const Calendar = props => {
+  const [date, setDate] = useState(props.date);
   const [selectedDates, setSelectedDates] = useState({
     start: new Date(),
     end: new Date(),
     hoverDate: new Date(),
     selectionInProcess: false
   });
+
+  const updateDate = date => setDate(date);
 
   const onDayHover = date => {
     if (selectedDates.selectionInProcess) {
@@ -64,10 +72,14 @@ const Calendar = props => {
   return (
     <CalendarContext.Provider
       value={{
-        date: props.date,
+        date,
         selectedDates,
+        dateFormat: props.dateFormat || "dd.MM.yyyy",
+        locale: props.locale || enUS,
+        weekStartsOn: props.weekStartsOn || 0,
         onDayClick,
-        onDayHover
+        onDayHover,
+        updateDate
       }}
     >
       {props.children}
