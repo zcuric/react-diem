@@ -1,7 +1,10 @@
 {
   "name": "react-diem",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.1.0-alpha",
+  "description": "A composable react date range component.",
+  "author": "Zdravko Curic <zcuric@gmail.com>",
+  "homepage": "https://github.com/zcuric/react-diem#readme",
+  "license": "MIT",
   "dependencies": {
     "date-fns": "^2.0.0-alpha.25",
     "react": "^16.7.0-alpha.0",
