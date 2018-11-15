@@ -8,6 +8,8 @@ import NavigationButtons from "./components/NavigationButtons";
 import DisplayRange from "./components/DisplayRange";
 import DisplayMonth from "./components/DisplayMonth";
 import DateSelect from "./components/DateSelect";
+import StaticRanges from "./components/StaticRanges";
+import defaultStaticRanges from "./utils/defaultStaticRanges";
 
 const App = () => (
   <div className="App">
@@ -19,6 +21,7 @@ const App = () => (
         <NavigationButtons />
         <DayNames />
         <Month />
+        <StaticRanges ranges={defaultStaticRanges} />
       </Calendar>
     </div>
   </div>

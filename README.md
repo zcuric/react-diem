@@ -21,6 +21,7 @@ _In development._
     <NavigationButtons />
     <DayNames />
     <Month />
+    <StaticRanges ranges={defaultStaticRanges} />
   </Calendar>
 ```
 
