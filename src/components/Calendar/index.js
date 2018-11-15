@@ -11,6 +11,7 @@ export const CalendarContext = React.createContext({
   dateFormat: "dd.MM.yyyy",
   locale: enUS,
   updateDate: () => {},
+  setDateRange: () => {},
   onDayHover: () => {},
   onDayClick: () => {}
 });
@@ -25,6 +26,12 @@ const Calendar = props => {
   });
 
   const updateDate = date => setDate(date);
+  const setDateRange = ({ start, end }) =>
+    setSelectedDates({
+      ...selectedDates,
+      start,
+      end
+    });
 
   const onDayHover = date => {
     if (selectedDates.selectionInProcess) {
@@ -77,7 +84,8 @@ const Calendar = props => {
         locale: props.locale || enUS,
         onDayClick,
         onDayHover,
-        updateDate
+        updateDate,
+        setDateRange
       }}
     >
       {props.children}

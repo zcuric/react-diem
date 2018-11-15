@@ -1,5 +1,5 @@
 import React from "react";
-import { render, wait, cleanup, fireEvent } from "react-testing-library";
+import { render, cleanup, fireEvent } from "react-testing-library";
 import Select from "../index";
 
 afterEach(cleanup);
