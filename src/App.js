@@ -9,19 +9,21 @@ import DisplayRange from "./components/DisplayRange";
 import DisplayMonth from "./components/DisplayMonth";
 import DateSelect from "./components/DateSelect";
 import StaticRanges from "./components/StaticRanges";
+import DateInput from "./components/DateInput";
 import defaultStaticRanges from "./utils/defaultStaticRanges";
 
 const App = () => (
   <div className="App">
     <div className="container">
       <Calendar date={new Date()} locale={locale}>
-        <DateSelect />
         <DisplayMonth />
         <DisplayRange />
+        <DateSelect />
+        <DateInput />
+        <StaticRanges ranges={defaultStaticRanges} />
         <NavigationButtons />
         <DayNames />
         <Month />
-        <StaticRanges ranges={defaultStaticRanges} />
       </Calendar>
     </div>
   </div>
