@@ -2,7 +2,7 @@ import React from "react";
 import { enUS as locale } from "date-fns/locale";
 import "./App.css";
 import Calendar from "./components/Calendar";
-import Month from "./components/Month";
+import Months from "./components/Months";
 import DayNames from "./components/DayNames";
 import NavigationButtons from "./components/NavigationButtons";
 import DisplayRange from "./components/DisplayRange";
@@ -23,7 +23,7 @@ const App = () => (
         <StaticRanges ranges={defaultStaticRanges} />
         <NavigationButtons />
         <DayNames />
-        <Month />
+        <Months />
       </Calendar>
     </div>
   </div>

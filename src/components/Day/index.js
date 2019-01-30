@@ -14,13 +14,13 @@ const StyledDay = styled.div`
   font-weight: bold;
   color: ${props => (props.isSameMonth ? "#424874" : "#D5D7E5")};
   ${props =>
-    props.isSelectedStartDay ||
-    props.isSelectedEndDay ||
-    props.isBetweenSelectedDates ||
-    props.isBetweenHoverAndSelectedDate
+    props.isBetweenSelectedDates || props.isBetweenHoverAndSelectedDate
       ? "background-color: #D5D7E5; color: #424874 "
       : "background-color: white;"};
-
+  ${props =>
+    props.isSelectedStartDay || props.isSelectedEndDay
+      ? "background-color: #808084; color: white "
+      : ""};
   ${props => (props.hover ? "border: 1px solid #424874" : "")};
 `;
 

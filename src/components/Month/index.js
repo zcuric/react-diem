@@ -4,36 +4,37 @@ import {
   endOfMonth,
   startOfWeek,
   endOfWeek,
-  eachDayOfInterval
+  eachDayOfInterval,
+  addMonths
 } from "date-fns";
 import Day from "../Day";
 import { CalendarContext } from "../Calendar";
 
-const daysOfMonth = (date, locale) =>
+const daysOfMonth = (date, locale, number) =>
   eachDayOfInterval({
-    start: startOfWeek(startOfMonth(date, { locale })),
-    end: endOfWeek(endOfMonth(date, { locale }))
+    start: addMonths(startOfWeek(startOfMonth(date, { locale })), number),
+    end: addMonths(endOfMonth(date, { locale }), number)
   });
 
-const Month = () => {
+const Month = ({ number }) => {
   return (
-    <div className="month">
-      <CalendarContext.Consumer>
-        {context =>
-          daysOfMonth(context.date, context.locale).map(day => (
+    <CalendarContext.Consumer>
+      {({ date, locale, onDayClick, onDayHover, selectedDates }) => (
+        <div className="month">
+          {daysOfMonth(date, locale, number).map(day => (
             <Day
-              onDayClick={context.onDayClick}
-              onDayHover={context.onDayHover}
-              selectedDates={context.selectedDates}
+              onDayClick={onDayClick}
+              onDayHover={onDayHover}
+              selectedDates={selectedDates}
               key={day}
-              date={context.date}
+              date={date}
               day={day}
-              locale={context.locale}
+              locale={locale}
             />
-          ))
-        }
-      </CalendarContext.Consumer>
-    </div>
+          ))}
+        </div>
+      )}
+    </CalendarContext.Consumer>
   );
 };
 
